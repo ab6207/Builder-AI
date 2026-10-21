@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import api from "../api/api";
 
 const AppContext = createContext(undefined);
 
@@ -12,8 +13,11 @@ export function AppContextProvider({children}){
     // Auth States
     const checkSession = async ()=>{
         try {
-            const {data} = await
+            const {data} = await api.get("/api/auth/me");
+            setUser(data.user)
         } catch (error) {
+            setUser(null)
+        }finally{
             
         }
     }
